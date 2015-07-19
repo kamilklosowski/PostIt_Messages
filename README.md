@@ -6,7 +6,7 @@
 1. Install npm, nodejs, mongodb
 
 2. Clone repository
-`git clone git@github.com:kamilklosowski/PostIt.git`
+`git clone git@github.com:kamilklosowski/PostIt_Messages.git`
 
 3. Install dependencies
 `npm install`
