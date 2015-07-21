@@ -12,11 +12,15 @@
     $stateProvider
       .state('form', {
         url: '/',
-        templateUrl: '../views/partials/form.html'
+        templateUrl: '../views/partials/form.html',
+        controller: 'PostItCtrl',
+        controllerAs: 'PostIt'
       })
       .state('table', {
         url: '/table',
-        templateUrl: '../views/partials/table.html'
+        templateUrl: '../views/partials/table.html',
+        controller: 'PostItCtrl',
+        controllerAs: 'PostIt'
       });
 
     $urlRouterProvider.otherwise(function($injector) {

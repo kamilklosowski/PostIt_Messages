@@ -6,56 +6,65 @@
     .module('post-it')
     .controller('PostItCtrl', PostItCtrl);
 
-  function PostItCtrl($scope, $q, $timeout, Socket, Users) {
-
-    var getUsers = function() {
-      var deferred = $q.defer();
-
-      Users.getUsers().then(function(data) {
-        $scope.users = data;
-        deferred.resolve();
-      });
-
-      return deferred.promise;
-    };
+  function PostItCtrl($timeout, Socket, Users) {
+    var vm = this;
 
     // Sorting
-    $scope.sortBy = 'id';
-    $scope.sortAsc = false;
+    vm.sortBy = 'id';
+    vm.sortAsc = false;
+
+    // Controller functions
+    vm.sendMessage = sendMessage;
+    vm.readMessages = readMessages;
 
     // Populating users
-    $scope.users = null;
     getUsers(); // initial
 
-    /***************
-     * Socket Events
-     ***************/
+    // Socket Events
     Socket.on('send:message', getUsers);
     Socket.on('read:message', function(data) {
       getUsers().then(function() {
-        // wait for $scope refreshes view and end digest cycle
+        // after controller trigger view refresh, wait until digest cycle ends
         $timeout(function() {
-          $scope.readMessages(data.user);
+          vm.readMessages(data.user);
         });
       });
     });
 
     /**
+     * Controller functions definitions
+     */
+
+    /**
+     * Getting users from DB
+     * @returns {*}
+     */
+    function getUsers() {
+      return Users.getUsers().then(function(data) {
+        vm.users = data;
+        return vm.users;
+      });
+    }
+
+    /**
      * Sending message to all users
      * @param {string} message
      */
-    $scope.sendMessage = function(message) {
+    function sendMessage(message) {
       Socket.emit('send:message', {
         message: message
       });
-    };
+
+      alert('Wiadomość wysłana do wszystkich użytkowników!');
+      vm.textAreaText = '';
+    }
 
     /**
      * Read last message & update unreaded messages status
      * @param user
      * @returns {boolean}
      */
-    $scope.readMessages = function(user) {
+    function readMessages(user) {
 
       if (!user.messages.length) {
         return false;
@@ -69,7 +78,7 @@
         });
       }
 
-    };
+    }
 
   }
 

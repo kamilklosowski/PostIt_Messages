@@ -2,31 +2,31 @@
     <thead>
       <tr>
         <th>
-          <a href="#" ng-click="sortBy = 'id'; sortAsc = !sortAsc">
+          <a href="#" ng-click="PostIt.sortBy = 'id'; PostIt.sortAsc = !PostIt.sortAsc">
             Lp
-            <span ng-show="sortBy == 'id' && !sortAsc" class="fa fa-caret-down"></span>
-            <span ng-show="sortBy == 'id' && sortAsc" class="fa fa-caret-up"></span>
+            <span ng-show="PostIt.sortBy == 'id' && !PostIt.sortAsc" class="fa fa-caret-down"></span>
+            <span ng-show="PostIt.sortBy == 'id' && PostIt.sortAsc" class="fa fa-caret-up"></span>
           </a>
         </th>
         <th>
-          <a href="#" ng-click="sortBy = 'first_name'; sortAsc = !sortAsc">
+          <a href="#" ng-click="PostIt.sortBy = 'first_name'; PostIt.sortAsc = !PostIt.sortAsc">
             Imię
-            <span ng-show="sortBy == 'first_name' && !sortAsc" class="fa fa-caret-down"></span>
-            <span ng-show="sortBy == 'first_name' && sortAsc" class="fa fa-caret-up"></span>
+            <span ng-show="PostIt.sortBy == 'first_name' && !PostIt.sortAsc" class="fa fa-caret-down"></span>
+            <span ng-show="PostIt.sortBy == 'first_name' && PostIt.sortAsc" class="fa fa-caret-up"></span>
           </a>
         </th>
         <th>
-          <a href="#" ng-click="sortBy = 'name'; sortAsc = !sortAsc">
+          <a href="#" ng-click="PostIt.sortBy = 'name'; PostIt.sortAsc = !PostIt.sortAsc">
             Nazwisko
-            <span ng-show="sortBy == 'name' && !sortAsc" class="fa fa-caret-down"></span>
-            <span ng-show="sortBy == 'name' && sortAsc" class="fa fa-caret-up"></span>
+            <span ng-show="PostIt.sortBy == 'name' && !PostIt.sortAsc" class="fa fa-caret-down"></span>
+            <span ng-show="PostIt.sortBy == 'name' && PostIt.sortAsc" class="fa fa-caret-up"></span>
           </a>
         </th>
         <th class="hidden-xs">
-          <a href="#" ng-click="sortBy = 'position'; sortAsc = !sortAsc">
+          <a href="#" ng-click="PostIt.sortBy = 'position'; PostIt.sortAsc = !sortAsc">
             Stanowisko
-            <span ng-show="sortBy == 'position' && !sortAsc" class="fa fa-caret-down"></span>
-            <span ng-show="sortBy == 'position' && sortAsc" class="fa fa-caret-up"></span>
+            <span ng-show="PostIt.sortBy == 'position' && !PostIt.sortAsc" class="fa fa-caret-down"></span>
+            <span ng-show="PostIt.sortBy == 'position' && PostIt.sortAsc" class="fa fa-caret-up"></span>
           </a>
         </th>
         <th>
@@ -34,7 +34,7 @@
         </th>
       </tr>
       <tbody>
-        <tr ng-repeat="user in users | orderBy:sortBy:sortAsc">
+        <tr ng-repeat="user in PostIt.users | orderBy:PostIt.sortBy:PostIt.sortAsc">
           <td>{{user.id}}</td>
           <td>{{user.first_name}}</td>
           <td>{{user.name}}</td>
@@ -42,7 +42,7 @@
           <td>
             <button class="btn btn-default col-xs-12 col-sm-4">Pokaż</button>
             <button class="btn btn-default col-xs-12 col-sm-4">
-                <a ng-click="readMessages(user)">
+                <a ng-click="PostIt.readMessages(user)">
                     Wiadomości {{user.messages.length}}
                 </a>
             </button>
